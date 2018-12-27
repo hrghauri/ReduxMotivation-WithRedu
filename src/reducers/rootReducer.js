@@ -4,13 +4,32 @@ const initState = {
 
 
 const rootReducer = (state = initState, action) =>{
-    console.log(action)
     if(action.type === 'ADD_NAME'){
-        return {
+
+        const newState = {
             ...state,
-            names: [...state.names, action.payload]
+            names: [...state.names, action.name]
         }
+
+
+        return newState
+
     }
+
+    if(action.type==='REMOVE_NAME'){    
+
+        let clonedNames = JSON.parse(JSON.stringify(state.names))
+        clonedNames.splice(action.index,1)
+
+        const newState = {
+            ...state,
+            names: clonedNames
+        }
+
+        return newState;
+    }
+
+
     return state;
 }
 
